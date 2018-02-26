@@ -1,0 +1,7 @@
+BootA.asm is fiited in the MBR sector together with the
+	partition table
+	
+
+In the HDD case
+
+Myfile.txt
