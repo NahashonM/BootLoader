@@ -1,0 +1,37 @@
+Hello Again...!
+
+Our bootloader will be a 3 stage loader.
+A BootA which loads a BootB
+	both these live on numbered blocks and should be static
+	from relocation
+BootC is loaded by BootB and resides on a filing system
+	relocatable
+
+
+partition table:
+	1. MBR
+		a. 2 TB limit
+		b. 4 partions
+		c. 
+	2. GPT
+		- Doesnt suffer any of the above
+
+in using GPT disk structure
+
+[ BootLoader | protective mbr partition ]   [    GPT HEADER   ]
+  446 bytes		  64 bytes + magicnum
+		1st Sector (512 bytes)					 2nd sector
+		
+		
+In MBR just have the BootLoader and mbr partition within the 512 bytes
+The Code in MBR is not enough to load a kernel loader
+So just tuck the stage 2 safely in the gap btwn MBR and first defined
+	partition
+The Bpb will help you locate the other stages.
+
+In GPT we dont have this..
+But we can define a Bios Boot Partition for us
+This will hold our stage 2 loader
+This BBP should never be touched as long as our DDD exists
+Real sectors can then start from here
+The BPB will still be here
